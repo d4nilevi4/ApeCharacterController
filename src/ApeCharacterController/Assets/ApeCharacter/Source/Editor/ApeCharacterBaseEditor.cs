@@ -149,7 +149,22 @@ namespace ApeCharacter.Editor
             throw new NotImplementedException();
         }
 
+        public bool TryGetSystem(Type systemType, out IApeSystem system)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryGetSystem<T>(out IApeSystem system) where T : IApeSystem
+        {
+            throw new NotImplementedException();
+        }
+
         public bool HasSystem<T>() where T : IApeSystem
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasSystem(Type systemType)
         {
             throw new NotImplementedException();
         }

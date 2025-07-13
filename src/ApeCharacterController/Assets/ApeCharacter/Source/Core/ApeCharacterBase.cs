@@ -43,10 +43,17 @@ namespace ApeCharacter
             
             _container.Bind<IApeSystemFactory, ApeSystemFactory>();
             _container.Bind<IMovementInput, MovementInput>();
-
+            
+            _container.InjectAll();
             InjectMonoBehaviours();
             
-            AfterAwake();
+            foreach (IComponentRegistrar registrar in GetComponentsInChildren<IComponentRegistrar>())
+                registrar.RegisterComponents();
+            
+            InitializeSystems();
+
+            new SystemsValidator().ValidateSystems(this, transform);
+            
         }
 
         private void InjectMonoBehaviours()
@@ -113,16 +120,6 @@ namespace ApeCharacter
             var apeSystemFactory = _container.Resolve<IApeSystemFactory>();
             
             apeSystemFactory.CreateSystem(systemType);
-        }
-        
-        private void AfterAwake()
-        {
-            _container.InjectAll();
-            
-            foreach (IComponentRegistrar registrar in GetComponentsInChildren<IComponentRegistrar>())
-                registrar.RegisterComponents();
-            
-            InitializeSystems();
         }
 
         private void OnDestroy()

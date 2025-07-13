@@ -47,10 +47,27 @@ namespace ApeCharacter
             system = default;
             return false;
         }
+        
+        public bool TryGetSystem(Type systemType, out IApeSystem system)
+        {
+            if (_systems.TryGetValue(systemType, out IApeSystem foundSystem))
+            {
+                system = foundSystem;
+                return true;
+            }
+
+            system = default;
+            return false;
+        }
 
         public bool HasSystem<T>() where T : IApeSystem
         {
             return _systems.ContainsKey(typeof(T));
+        }
+        
+        public bool HasSystem(Type systemType)
+        {
+            return _systems.ContainsKey(systemType);
         }
 
         public T GetSystem<T>() where T : IApeSystem

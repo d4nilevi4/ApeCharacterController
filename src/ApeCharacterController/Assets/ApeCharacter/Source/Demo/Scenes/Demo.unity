@@ -280,7 +280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SystemTypes:
-  - TypeName: ApeCharacter.Demo.Locomotion.JumpFeature
   - TypeName: ApeCharacter.Demo.Locomotion.MovementFeature
 --- !u!114 &523901628
 MonoBehaviour:
