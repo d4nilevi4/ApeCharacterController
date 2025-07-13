@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using ApeCharacter.Demo.Locomotion;
 using ApeCharacter.Injector;
 using UnityEngine;
@@ -8,11 +7,11 @@ using UnityEngine;
 namespace ApeCharacter
 {
     [System.Serializable]
-    public class SystemTypeReference
+    public class FeatureTypeReference
     {
         public string TypeName;
 
-        public SystemTypeReference(Type typeName)
+        public FeatureTypeReference(Type typeName)
         {
             TypeName = typeName.FullName;
         }
@@ -22,7 +21,7 @@ namespace ApeCharacter
     [RequireComponent(typeof(CharacterKernel))]
     public abstract class ApeCharacterBase : MonoBehaviour, IApeCharacter
     {
-        public List<SystemTypeReference> SystemTypes = new();
+        public List<FeatureTypeReference> FeatureTypes = new();
         
         private DiContainer _container;
         
@@ -66,7 +65,7 @@ namespace ApeCharacter
 
         private void InitializeSystems()
         {
-            foreach (var systemTypeRef in SystemTypes)
+            foreach (var systemTypeRef in FeatureTypes)
             {
                 Type systemType = GetTypeByName(systemTypeRef.TypeName);
                 if (systemType == null)
