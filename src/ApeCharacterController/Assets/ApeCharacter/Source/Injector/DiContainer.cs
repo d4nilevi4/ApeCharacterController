@@ -42,6 +42,27 @@ namespace ApeCharacter.Injector
             }
         }
 
+        public object Instantiate(Type type)
+        {
+            var constructors = type.GetConstructors();
+            var injectCtor = constructors.FirstOrDefault(c =>
+                                 c.GetCustomAttributes(typeof(InjectAttribute), true).Any())
+                             ?? constructors.OrderByDescending(c => c.GetParameters().Length)
+                                 .First();
+
+            var parameters = injectCtor.GetParameters()
+                .Select(p => Resolve(p.ParameterType))
+                .ToArray();
+
+            var instance = injectCtor.Invoke(parameters);
+
+            _singletons[type] = instance;
+
+            InjectDependencies(instance, type);
+
+            return instance;
+        }
+        
         public T Instantiate<T>()
         {
             var type = typeof(T);

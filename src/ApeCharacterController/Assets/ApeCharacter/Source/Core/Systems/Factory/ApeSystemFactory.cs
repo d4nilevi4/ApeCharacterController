@@ -1,3 +1,4 @@
+using System;
 using ApeCharacter.Injector;
 using UnityEngine;
 
@@ -19,20 +20,25 @@ namespace ApeCharacter
 
         public T CreateSystem<T>() where T : class, IApeSystem
         {
-            T apeSystem;
+            return (T)CreateSystem(typeof(T));
+        }
 
-            if (typeof(MonoBehaviour).IsAssignableFrom(typeof(T)))
+        public IApeSystem CreateSystem(Type systemType)
+        {
+            IApeSystem apeSystem;
+
+            if (typeof(MonoBehaviour).IsAssignableFrom(systemType))
             {
-                var component = _characterKernel.GetComponentInChildren(typeof(T), true);
-
-                apeSystem = component as T;
+                var component = _characterKernel.GetComponentInChildren(systemType, true);
+            
+                apeSystem = component as IApeSystem;
                 if (apeSystem == null)
                     throw new System.Exception(
-                        $"Компонент типа {typeof(T).Name} не найден среди детей CharacterKernel.");
+                        $"Компонент типа {systemType.Name} не найден среди детей CharacterKernel.");
             }
             else
             {
-                apeSystem = _container.Instantiate<T>();
+                apeSystem = (IApeSystem)_container.Instantiate(systemType);
             }
 
             if (apeSystem is IInitializable initializable)

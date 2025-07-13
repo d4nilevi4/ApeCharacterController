@@ -7,8 +7,6 @@ namespace ApeCharacter.Demo.Locomotion
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private float _rotationSpeed = 10f;
         
-        private IApeCharacter _owner;
-        
         public void OnUpdate(float dt)
         {
             float mouseX = Input.GetAxis("Mouse X");

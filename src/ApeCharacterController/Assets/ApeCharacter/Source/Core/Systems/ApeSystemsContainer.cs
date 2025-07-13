@@ -6,7 +6,7 @@ namespace ApeCharacter
     public sealed class ApeSystemsContainer : IApeSystemsContainer
     {
         private readonly Dictionary<Type, IApeSystem> _systems = new();
-
+        
         public void AddSystem<T>(T system) where T : IApeSystem
         {
             if (system == null)

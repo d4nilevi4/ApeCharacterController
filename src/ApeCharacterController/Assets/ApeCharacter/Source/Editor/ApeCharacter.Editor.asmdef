@@ -1,0 +1,19 @@
+{
+    "name": "ApeCharacter.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8a2d2897b9b86bc45a9cb953717acc3b",
+        "GUID:a0f74ae21fd0fc34fb838e084e6b7fef"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

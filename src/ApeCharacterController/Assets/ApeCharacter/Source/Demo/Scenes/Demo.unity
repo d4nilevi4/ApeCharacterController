@@ -279,6 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cea1bac993741c7a19913af10fc6533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SystemTypes:
+  - TypeName: ApeCharacter.Demo.Locomotion.JumpFeature
+  - TypeName: ApeCharacter.Demo.Locomotion.MovementFeature
 --- !u!114 &523901628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 592441452}
   - component: {fileID: 592441453}
+  - component: {fileID: 592441454}
   m_Layer: 0
   m_Name: '[Systems]'
   m_TagString: Untagged
@@ -337,6 +341,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 523901626}
   _rotationSpeed: 10
+--- !u!114 &592441454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592441451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fda00a5282a442a81b6eb65290a87f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpForce: 10
+  _rigidbody: {fileID: 523901626}
 --- !u!1 &659280604
 GameObject:
   m_ObjectHideFlags: 0
