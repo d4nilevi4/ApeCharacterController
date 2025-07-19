@@ -18,11 +18,12 @@ namespace ApeCharacter
     }
     
     // TODO: Find more eligible place for registration and unregistration.
+    [DefaultExecutionOrder(-1)]
     [RequireComponent(typeof(CharacterKernel))]
     public abstract class ApeCharacterBase : MonoBehaviour, IApeCharacter
     {
         public List<FeatureTypeReference> FeatureTypes = new();
-        
+
         private DiContainer _container;
         
         public IApeSystemsContainer Systems { get; private set; } = 
@@ -42,6 +43,8 @@ namespace ApeCharacter
             
             _container.Bind<IApeSystemFactory, ApeSystemFactory>();
             _container.Bind<IMovementInput, MovementInput>();
+
+            RegisterMonoInstallers();
             
             _container.InjectAll();
             InjectMonoBehaviours();
@@ -53,6 +56,15 @@ namespace ApeCharacter
 
             new SystemsValidator().ValidateSystems(this, transform);
             
+        }
+
+        private void RegisterMonoInstallers()
+        {
+            foreach (MonoInstaller installer in this.GetComponentsInChildren<MonoInstaller>())
+            {
+                installer.Container = _container;
+                installer.InstallBindings();
+            }
         }
 
         private void InjectMonoBehaviours()

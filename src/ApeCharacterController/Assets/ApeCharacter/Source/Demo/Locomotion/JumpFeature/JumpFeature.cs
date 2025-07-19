@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ApeCharacter.Demo.Locomotion
 {
-    public class JumpFeature : MonoFeature, IUpdatable
+    [Serializable]
+    public class JumpFeature : MonoFeature
     {
         [SerializeField] private float _jumpForce;
         [SerializeField] private Rigidbody _rigidbody;
         
-        private IApeCharacter _owner;
-
-        public void OnUpdate(float dt)
+        public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {

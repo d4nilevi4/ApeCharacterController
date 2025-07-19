@@ -1,8 +1,10 @@
+using System;
 using ApeCharacter.Injector;
 using UnityEngine;
 
 namespace ApeCharacter
 {
+    [Serializable]
     public abstract class MonoFeature : MonoBehaviour, IApeFeature
     {
         private IApeSystemFactory _systemFactory;

@@ -1,4 +1,5 @@
 using System;
+using ApeCharacter.Demo.Locomotion;
 using ApeCharacter.Injector;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace ApeCharacter
     {
         private readonly DiContainer _container;
         private readonly CharacterKernel _characterKernel;
-
+        
         public ApeSystemFactory(
             DiContainer container,
             CharacterKernel characterKernel

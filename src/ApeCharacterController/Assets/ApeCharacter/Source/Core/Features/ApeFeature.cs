@@ -1,10 +1,16 @@
+using System;
+using UnityEngine;
+
 namespace ApeCharacter
 {
+    [Serializable]
     public abstract class ApeFeature : IApeFeature
     {
         private readonly IApeSystemFactory _systemFactory;
         private readonly IApeCharacter _owner;
 
+        [SerializeField] protected bool Feature;
+        
         protected ApeFeature(
             IApeSystemFactory systemFactory,
             IApeCharacter owner

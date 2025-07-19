@@ -6,7 +6,7 @@
             : base(systemFactory, owner)
         {
             Add<ApeMovementInitializeSystem>();
-            
+
             Add<EmitMovementInputSystem>();
 
             Add<RotationSystem>();

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
@@ -12,17 +10,19 @@ namespace ApeCharacter.Editor
     [CustomEditor(typeof(ApeCharacterBase), true)]
     public class ApeCharacterBaseEditor : UnityEditor.Editor
     {
+        private VisualElement _systemsRoot;
+
         public override VisualElement CreateInspectorGUI()
         {
             var root = new VisualElement();
 
-            var systemTypesField = new PropertyField(serializedObject.FindProperty("FeatureTypes"))
-            {
-                label = "Feature Types"
-            };
+            _systemsRoot = new VisualElement();
+            _systemsRoot.name = "systems-root";
             
-            root.Add(systemTypesField);
+            root.Add(_systemsRoot);
             
+            DrawSystems();
+
             var addSystemButton = new Button()
             {
                 text = "Add System",
@@ -33,6 +33,22 @@ namespace ApeCharacter.Editor
             root.Add(addSystemButton);
 
             return root;
+        }
+
+        private void DrawSystems()
+        {
+            var systemTypesField = new PropertyField(serializedObject.FindProperty("FeatureTypes"))
+            {
+                label = "Feature Types"
+            };
+
+            _systemsRoot.Add(systemTypesField);
+
+            SerializedProperty propertyFeature = serializedObject.FindProperty("ApeFeature");
+            
+            PropertyField fieldPlayer = new PropertyField(propertyFeature);
+            
+            _systemsRoot.Add(fieldPlayer);
         }
 
         private void ShowActionList()
